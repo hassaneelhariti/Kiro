@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+Responsibilities.txt
+src/main/resources/application.properties
