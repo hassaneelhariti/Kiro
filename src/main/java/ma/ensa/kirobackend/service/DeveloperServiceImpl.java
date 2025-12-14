@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import ma.ensa.kirobackend.dtos.TaskDto;
 import ma.ensa.kirobackend.entities.Developer;
 import ma.ensa.kirobackend.entities.Task;
+import ma.ensa.kirobackend.enums.TaskStatus;
+import ma.ensa.kirobackend.exceptions.TaskNotFoundException;
 import ma.ensa.kirobackend.exceptions.UserNotFoundException;
 import ma.ensa.kirobackend.mappers.TaskMapper;
 import ma.ensa.kirobackend.repository.DeveloperRepository;
@@ -33,5 +35,14 @@ public class DeveloperServiceImpl implements DeveloperService{
             devTasksDto.add(taskDto);
         }
         return devTasksDto;
+    }
+    @Override
+    public TaskDto updateTaskStatus(Long taskId, TaskStatus taskStatus){
+        Task task=taskRepository.findById(taskId).orElse(null);
+        if(task==null) throw new TaskNotFoundException("Task not Found");
+
+        task.setStatus(taskStatus);
+        Task task1=taskRepository.save(task);
+        return taskMapper.taskToTaskDto(task1);
     }
 }
