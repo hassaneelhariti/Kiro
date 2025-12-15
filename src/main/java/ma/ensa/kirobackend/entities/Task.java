@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import ma.ensa.kirobackend.enums.TaskStatus;
 
+import java.util.List;
+
 @Entity
 @Data
 public class Task {
