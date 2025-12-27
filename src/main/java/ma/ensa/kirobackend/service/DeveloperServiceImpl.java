@@ -2,8 +2,10 @@ package ma.ensa.kirobackend.service;
 
 
 import lombok.AllArgsConstructor;
+import ma.ensa.kirobackend.dtos.ProjetDto;
 import ma.ensa.kirobackend.dtos.TaskDto;
 import ma.ensa.kirobackend.entities.Developer;
+import ma.ensa.kirobackend.entities.Projet;
 import ma.ensa.kirobackend.entities.Task;
 import ma.ensa.kirobackend.enums.TaskStatus;
 import ma.ensa.kirobackend.exceptions.TaskNotFoundException;
@@ -44,5 +46,22 @@ public class DeveloperServiceImpl implements DeveloperService{
         task.setStatus(taskStatus);
         Task task1=taskRepository.save(task);
         return taskMapper.taskToTaskDto(task1);
+    }
+
+    //Consulter ses projets
+    @Override
+    public List<ProjetDto> viewProjects(Long devId){
+        List<Projet> projetList=developerRepository.findDeveloperById(devId);
+        List<ProjetDto> projetDtoList= new ArrayList<>();
+        for (Projet projet :projetList){
+
+        }
+        return projetDtoList;
+    }
+    // create new task by a developer auto assigned
+    @Override
+    public TaskDto createNewTask(TaskDto taskDto) {
+        Task task=taskRepository.save(taskMapper.dtoToTask(taskDto));
+        return taskMapper.taskToTaskDto(task);
     }
 }

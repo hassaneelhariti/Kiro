@@ -3,9 +3,11 @@ package ma.ensa.kirobackend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Setter;
 import ma.ensa.kirobackend.enums.TaskStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Data

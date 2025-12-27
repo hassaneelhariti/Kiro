@@ -5,7 +5,7 @@ import ma.ensa.kirobackend.dtos.UserStoryDto;
 import ma.ensa.kirobackend.entities.SprintBacklog;
 import ma.ensa.kirobackend.entities.UserStory;
 
-public interface SprintBacklogMapper {
+public interface developerMapper {
     SprintBacklog toSprintBacklog(SprintBacklogDto sprintBacklogDto);
 
     SprintBacklogDto toSprintBacklogDto(SprintBacklog sprintBacklog);

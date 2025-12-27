@@ -1,14 +1,15 @@
 package ma.ensa.kirobackend.mappers;
 
 import lombok.AllArgsConstructor;
+import ma.ensa.kirobackend.dtos.ProjetDto;
 import ma.ensa.kirobackend.dtos.SprintBacklogDto;
 import ma.ensa.kirobackend.dtos.TaskDto;
 import ma.ensa.kirobackend.dtos.UserStoryDto;
+import ma.ensa.kirobackend.entities.Projet;
 import ma.ensa.kirobackend.entities.SprintBacklog;
 import ma.ensa.kirobackend.entities.Task;
 import ma.ensa.kirobackend.entities.UserStory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class SprintBacklogMapperImpl implements SprintBacklogMapper{
+public class developerMapperImpl implements developerMapper {
     private TaskMapper taskMapper;
 
     @Override
@@ -54,6 +55,13 @@ public class SprintBacklogMapperImpl implements SprintBacklogMapper{
         UserStory userStory=new UserStory();
         BeanUtils.copyProperties(userStoryDto,userStory);
         return userStory;
+    }
+
+    public ProjetDto toProjetDto(Projet projet){
+        ProjetDto projetDto=new ProjetDto();
+        BeanUtils.copyProperties(projet,projetDto);
+
+        return projetDto;
     }
 
 

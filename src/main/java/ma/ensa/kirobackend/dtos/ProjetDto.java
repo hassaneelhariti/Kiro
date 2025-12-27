@@ -18,14 +18,14 @@ public class ProjetDto {
     private Date startDate;
     private Date endDate;
 
-    private ProductOwner productOwner;
-    private ScrumMaster scrumMaster;
+    private ProductOwnerDto productOwner;
+    private ScrumMasterDto scrumMaster;
 
-    private List<Developer> developers = new ArrayList<>();
+    private List<DeveloperDto> developers = new ArrayList<>();
 
-    private ProductBacklog productBacklog;
+    private ProductBacklogDto productBacklog;
 
-    private List<Sprint> sprints;
+    private List<SprintDto> sprints;
 
 
 

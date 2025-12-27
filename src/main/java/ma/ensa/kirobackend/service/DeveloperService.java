@@ -1,5 +1,6 @@
 package ma.ensa.kirobackend.service;
 
+import ma.ensa.kirobackend.dtos.ProjetDto;
 import ma.ensa.kirobackend.dtos.TaskDto;
 import ma.ensa.kirobackend.enums.TaskStatus;
 
@@ -9,4 +10,9 @@ public interface DeveloperService {
     List<TaskDto> allTasks(Long devId);
 
     TaskDto updateTaskStatus(Long taskId, TaskStatus taskStatus);
+
+    //Consulter ses projets
+    List<ProjetDto> viewProjects(Long devId);
+
+    TaskDto createNewTask(TaskDto taskDto);
 }

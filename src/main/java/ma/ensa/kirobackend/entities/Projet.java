@@ -37,7 +37,7 @@ public class Projet {
     private ProductBacklog productBacklog;
 
     @OneToMany(mappedBy = "projet")
-    private List<Sprint> sprints;
+    private List<SprintBacklog> sprintBacklogs;
 
 
 

@@ -16,9 +16,9 @@ public class TaskDto {
     private TaskStatus status;
 
     private Long sprintBacklogId;
-    private String  developerName;
-    private String scrumMasterName;
-    private String userStoryTitle;
+    private Long  developerId;
+    private Long scrumMasterId;
+    private Long userStoryId;
 
 
 }
