@@ -20,8 +20,6 @@ public class Task {
 //    @Enumerated(EnumType.STRING)
     private TaskStatus status;
 
-    @OneToOne
-    private SprintBacklog sprintBacklog;
     @JsonIgnore // pour ignorer liste lorsque il fait la serialisation en json on aura une boucle entre bankaccount et customer
     @ManyToOne
     private Developer developer;

@@ -11,8 +11,7 @@ import ma.ensa.kirobackend.enums.TaskStatus;
 import ma.ensa.kirobackend.exceptions.TaskNotFoundException;
 import ma.ensa.kirobackend.exceptions.UserNotFoundException;
 import ma.ensa.kirobackend.mappers.TaskMapper;
-import ma.ensa.kirobackend.repository.DeveloperRepository;
-import ma.ensa.kirobackend.repository.TaskRepository;
+import ma.ensa.kirobackend.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,6 +22,8 @@ import java.util.List;
 public class DeveloperServiceImpl implements DeveloperService{
     private TaskRepository taskRepository;
     private DeveloperRepository developerRepository;
+    private ScrumMasterRepository scrumMasterRepository;
+    private UserStoryRepository userStoryRepository;
     private TaskMapper taskMapper;
 
     @Override
@@ -61,7 +62,28 @@ public class DeveloperServiceImpl implements DeveloperService{
     // create new task by a developer auto assigned
     @Override
     public TaskDto createNewTask(TaskDto taskDto) {
-        Task task=taskRepository.save(taskMapper.dtoToTask(taskDto));
-        return taskMapper.taskToTaskDto(task);
+
+        Task task = taskMapper.dtoToTask(taskDto);
+
+        task.setDeveloper(
+                developerRepository.findById(taskDto.getDeveloperId())
+                        .orElseThrow(() -> new RuntimeException("Developer not found"))
+        );
+
+        task.setScrumMaster(
+                scrumMasterRepository.findById(taskDto.getScrumMasterId())
+                        .orElseThrow(() -> new RuntimeException("ScrumMaster not found"))
+        );
+
+
+        task.setUserStory(
+                userStoryRepository.findById(taskDto.getUserStoryId())
+                        .orElseThrow(() -> new RuntimeException("UserStory not found"))
+        );
+
+        Task savedTask = taskRepository.save(task);
+
+        return taskMapper.taskToTaskDto(savedTask);
     }
+
 }
