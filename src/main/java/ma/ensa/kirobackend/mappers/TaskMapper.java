@@ -12,6 +12,7 @@ public interface TaskMapper {
     @Mapping(target = "developerId", source = "developer.id")
     @Mapping(target = "scrumMasterId", source = "scrumMaster.id")
     @Mapping(target = "userStoryId", source = "userStory.id")
+    @Mapping(target = "commentDtos", source = "comments")
     TaskDto taskToTaskDto(Task task);
 
     // DTO → Entity (relations gérées dans le service)

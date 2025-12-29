@@ -2,14 +2,17 @@ package ma.ensa.kirobackend.service;
 
 
 import lombok.AllArgsConstructor;
+import ma.ensa.kirobackend.dtos.CommentDto;
 import ma.ensa.kirobackend.dtos.ProjetDto;
 import ma.ensa.kirobackend.dtos.TaskDto;
+import ma.ensa.kirobackend.entities.Comment;
 import ma.ensa.kirobackend.entities.Developer;
 import ma.ensa.kirobackend.entities.Projet;
 import ma.ensa.kirobackend.entities.Task;
 import ma.ensa.kirobackend.enums.TaskStatus;
 import ma.ensa.kirobackend.exceptions.TaskNotFoundException;
 import ma.ensa.kirobackend.exceptions.UserNotFoundException;
+import ma.ensa.kirobackend.mappers.CommentMapper;
 import ma.ensa.kirobackend.mappers.TaskMapper;
 import ma.ensa.kirobackend.repository.*;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ public class DeveloperServiceImpl implements DeveloperService{
     private ScrumMasterRepository scrumMasterRepository;
     private UserStoryRepository userStoryRepository;
     private TaskMapper taskMapper;
+    private CommentMapper commentMapper;
 
     @Override
     public List<TaskDto> allTasks(Long devId){
@@ -35,6 +39,12 @@ public class DeveloperServiceImpl implements DeveloperService{
         List<TaskDto> devTasksDto=new ArrayList<>();
         for (Task task : devTasks ){
             TaskDto taskDto=taskMapper.taskToTaskDto(task);
+            List<CommentDto> commentDtos=new ArrayList<>();
+            for (Comment comment: task.getComments()){
+                CommentDto commentDto=commentMapper.commentToCommentDto(comment);
+                commentDtos.add(commentDto);
+            }
+            taskDto.setCommentDtos(commentDtos);
             devTasksDto.add(taskDto);
         }
         return devTasksDto;

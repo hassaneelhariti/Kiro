@@ -7,6 +7,9 @@ import ma.ensa.kirobackend.entities.SprintBacklog;
 import ma.ensa.kirobackend.entities.UserStory;
 import ma.ensa.kirobackend.enums.TaskStatus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 public class TaskDto {
@@ -18,6 +21,8 @@ public class TaskDto {
     private Long  developerId;
     private Long scrumMasterId;
     private Long userStoryId;
+
+    private List<CommentDto> commentDtos=new ArrayList<>();
 
 
 }

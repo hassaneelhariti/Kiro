@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Setter;
 import ma.ensa.kirobackend.enums.TaskStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,5 +34,8 @@ public class Task {
     @JoinColumn(name = "user_story_id")
     private UserStory userStory;
 
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
 
 }
