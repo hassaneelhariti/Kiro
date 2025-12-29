@@ -12,12 +12,14 @@ public interface CommentMapper {
     @Mapping(target="userId",source="user.id")
     @Mapping(target="userName",source="user.nom")
     @Mapping(target="taskId",source="task.id")
+    @Mapping(target = "photoBase64", source = "photo")
     CommentDto commentToCommentDto(Comment comment);
 
 
     //Dto to entity
     @Mapping(target="user",ignore = true)
     @Mapping(target="task",ignore = true)
+    @Mapping(target = "photo", source = "photoBase64")
     Comment dtoToComment(CommentDto commentDto);
 
 }

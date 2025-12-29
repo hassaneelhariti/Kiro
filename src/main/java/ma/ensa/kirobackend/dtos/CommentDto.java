@@ -8,8 +8,6 @@ public class CommentDto {
     private Long id;
     private String text;
     private String photoBase64;
-    private String photoName;
-    private String photoType;
     private LocalDateTime createdAt;
 
     // Informations de l'utilisateur

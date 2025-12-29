@@ -1,6 +1,7 @@
 package ma.ensa.kirobackend.controller;
 
 import lombok.AllArgsConstructor;
+import ma.ensa.kirobackend.dtos.CommentDto;
 import ma.ensa.kirobackend.dtos.ProjetDto;
 import ma.ensa.kirobackend.dtos.SprintBacklogDto;
 import ma.ensa.kirobackend.dtos.TaskDto;
@@ -43,6 +44,12 @@ public class DeveloperContoller {
     @PostMapping("/developer/{id}/create-task")
     public TaskDto createOwnTask(@RequestBody TaskDto task){
         return developerService.createNewTask(task);
+    }
+
+    //comment to task
+    @PostMapping("/developer/{id}/comment")
+    public CommentDto commentOnTask(@RequestBody CommentDto commentDto){
+        return developerService.commentOnTask(commentDto);
     }
 
 }

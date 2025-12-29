@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import ma.ensa.kirobackend.dtos.CommentDto;
 import ma.ensa.kirobackend.dtos.ProjetDto;
 import ma.ensa.kirobackend.dtos.TaskDto;
-import ma.ensa.kirobackend.entities.Comment;
-import ma.ensa.kirobackend.entities.Developer;
-import ma.ensa.kirobackend.entities.Projet;
-import ma.ensa.kirobackend.entities.Task;
+import ma.ensa.kirobackend.entities.*;
 import ma.ensa.kirobackend.enums.TaskStatus;
 import ma.ensa.kirobackend.exceptions.TaskNotFoundException;
 import ma.ensa.kirobackend.exceptions.UserNotFoundException;
@@ -29,6 +26,7 @@ public class DeveloperServiceImpl implements DeveloperService{
     private UserStoryRepository userStoryRepository;
     private TaskMapper taskMapper;
     private CommentMapper commentMapper;
+    private CommentRepository commentRepository;
 
     @Override
     public List<TaskDto> allTasks(Long devId){
@@ -95,5 +93,21 @@ public class DeveloperServiceImpl implements DeveloperService{
 
         return taskMapper.taskToTaskDto(savedTask);
     }
+
+
+    // developer comment on exact post
+    @Override
+    public CommentDto commentOnTask(CommentDto commentDto){
+        Comment comment=commentMapper.dtoToComment(commentDto);
+        Task task=taskRepository.findById(commentDto.getTaskId()).orElseThrow(()-> new RuntimeException( "task for comment not found"));
+        User user=developerRepository.findById(commentDto.getUserId())
+                .orElseThrow(() -> new RuntimeException("UserStory not found"));
+        comment.setTask(task);
+        comment.setUser(user);
+        Comment comment1=commentRepository.save(comment);
+        return commentMapper.commentToCommentDto(comment1);
+    }
+
+
 
 }

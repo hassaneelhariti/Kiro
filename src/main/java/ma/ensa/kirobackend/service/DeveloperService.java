@@ -1,5 +1,6 @@
 package ma.ensa.kirobackend.service;
 
+import ma.ensa.kirobackend.dtos.CommentDto;
 import ma.ensa.kirobackend.dtos.ProjetDto;
 import ma.ensa.kirobackend.dtos.TaskDto;
 import ma.ensa.kirobackend.enums.TaskStatus;
@@ -15,4 +16,7 @@ public interface DeveloperService {
     List<ProjetDto> viewProjects(Long devId);
 
     TaskDto createNewTask(TaskDto taskDto);
+
+    // developer comment on exact post
+    CommentDto commentOnTask(CommentDto commentDto);
 }

@@ -19,7 +19,7 @@ public class Comment {
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")
-    private byte[] photo;
+    private String photo;
 
 
     @Column(name = "created_at")
@@ -34,13 +34,7 @@ public class Comment {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    // Méthode utilitaire pour convertir la photo en base64
-    public String getPhotoBase64() {
-        if (photo != null && photo.length > 0) {
-            return java.util.Base64.getEncoder().encodeToString(photo);
-        }
-        return null;
-    }
+
 
     @PrePersist
     protected void onCreate() {
