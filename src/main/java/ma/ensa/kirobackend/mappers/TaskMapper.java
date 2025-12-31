@@ -5,7 +5,7 @@ import ma.ensa.kirobackend.entities.Task;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = CommentMapper.class)
 public interface TaskMapper {
 
     // Entity → DTO

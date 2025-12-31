@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class DeveloperContoller {
+public class DeveloperController {
     private DeveloperService developerService;
     private SprintBacklogService sprintBacklogService;
 
