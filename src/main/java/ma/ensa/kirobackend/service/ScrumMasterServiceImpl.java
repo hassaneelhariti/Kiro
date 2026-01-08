@@ -12,7 +12,9 @@ import ma.ensa.kirobackend.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -72,6 +74,20 @@ public class ScrumMasterServiceImpl implements ScrumMasterService{
             return taskMapper.taskToTaskDto(task2);
         }
 
+    }
+
+    //Move user stories to sprint backlog
+    @Override
+    public SprintBacklogDto linkUsToSprint(SprintBacklogDto sprintBacklogDto) {
+        SprintBacklog sprintBacklog = sprintBacklogRepository.findById(sprintBacklogDto.getId()).orElseThrow(() -> new RuntimeException("sprint not found"));
+        for (UserStoryDto userStoryDto :sprintBacklogDto.getUserStoriesList()){
+            UserStory userStory=userStoryRepository.findById(userStoryDto.getId()).orElseThrow(()->new RuntimeException("us "+userStoryDto.getId()+" not found "));
+            userStory.setSprintBacklog(sprintBacklog);
+            userStoryRepository.save(userStory);
+        }
+
+        SprintBacklog sprintbacklog2 = sprintBacklogRepository.findById(sprintBacklogDto.getId()).orElseThrow(() -> new RuntimeException("sprint not found"));
+        return sprintBacklogMapper.sprintBacklogToDto(sprintbacklog2);
     }
 
 }

@@ -12,4 +12,7 @@ public interface ScrumMasterService {
 
     //Assign tasks to developers(req : devId , Task Id)
     TaskDto assignTaskToDev(TaskDto taskDto);
+
+    //Move user stories to sprint backlog
+    SprintBacklogDto linkUsToSprint(SprintBacklogDto sprintBacklogDto);
 }

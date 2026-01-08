@@ -32,4 +32,12 @@ public class ScrumMasterController {
     public  TaskDto assignTask(@RequestBody TaskDto taskDto){
         return scrumMasterService.assignTaskToDev(taskDto);
     }
+
+    //Move user stories to sprint backlog
+    @PutMapping("scrum-master/{id}/link-us")
+    public SprintBacklogDto linkUsToSprint(@RequestBody SprintBacklogDto sprintBacklogDto){
+
+        return scrumMasterService.linkUsToSprint(sprintBacklogDto) ;
+    }
+
 }
