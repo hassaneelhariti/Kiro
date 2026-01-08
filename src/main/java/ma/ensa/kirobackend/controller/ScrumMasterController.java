@@ -3,6 +3,7 @@ package ma.ensa.kirobackend.controller;
 
 import lombok.AllArgsConstructor;
 import ma.ensa.kirobackend.dtos.SprintBacklogDto;
+import ma.ensa.kirobackend.dtos.TaskDto;
 import ma.ensa.kirobackend.service.ScrumMasterService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,5 +25,11 @@ public class ScrumMasterController {
     @PutMapping("scrum-master/{id}/update-sprint")
     public void updateSprintStatus(@RequestBody SprintBacklogDto sprintBacklogDto){
         scrumMasterService.updateSprintStatus(sprintBacklogDto);
+    }
+
+    //Assign tasks to developers (create a task and assign it to a developer)
+    @PutMapping("scrum-master/{id}/assigned-task")
+    public  TaskDto assignTask(@RequestBody TaskDto taskDto){
+        return scrumMasterService.assignTaskToDev(taskDto);
     }
 }
