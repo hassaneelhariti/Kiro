@@ -33,3 +33,13 @@ build/
 .vscode/
 Responsibilities.txt
 
+# =========================
+# Environment / Secrets
+# =========================
+.env
+
+# =========================
+# Logs
+# =========================
+*.log
+full-output.log
