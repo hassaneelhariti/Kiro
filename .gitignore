@@ -43,3 +43,6 @@ Responsibilities.txt
 # =========================
 *.log
 full-output.log
+
+insert_kiro_data.sh
+list-project.sh
