@@ -14,6 +14,7 @@ public class ProductBacklog {
     private Long id;
 
     private String name;
+//    @OneToMany(mappedBy = "productBacklog", cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "productBacklog")
     private List<Epic> epicsList;
 

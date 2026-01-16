@@ -19,6 +19,6 @@ public class EpicDto {
 
     private List<UserStoryDto> userStoriesList = new ArrayList<>();
 
-    private ProductBacklog productBacklog;
+    private Long productBacklogId;
 
 }
