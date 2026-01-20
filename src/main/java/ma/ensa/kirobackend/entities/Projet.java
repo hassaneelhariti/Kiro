@@ -32,7 +32,7 @@ public class Projet {
     )
     private List<Developer> developers = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "product_backlog_id")
     private ProductBacklog productBacklog;
 

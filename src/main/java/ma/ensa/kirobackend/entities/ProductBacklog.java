@@ -13,6 +13,9 @@ public class ProductBacklog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(mappedBy = "productBacklog")
+    private Projet projet;
+
     private String name;
 //    @OneToMany(mappedBy = "productBacklog", cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "productBacklog")
