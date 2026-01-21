@@ -33,3 +33,16 @@ build/
 .vscode/
 Responsibilities.txt
 
+# =========================
+# Environment / Secrets
+# =========================
+.env
+
+# =========================
+# Logs
+# =========================
+*.log
+full-output.log
+
+insert_kiro_data.sh
+list-project.sh
