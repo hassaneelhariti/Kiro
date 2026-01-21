@@ -26,9 +26,7 @@ public class UserStoryServiceImpl implements UserStoryService {
     @Override
     public List<UserStoryDto> getAllUserStories() {
         List<UserStory> userStories = userStoryRepository.findAll();
-        return userStories.stream()
-                .map(userStoryMapper::toUserStoryDto)
-                .collect(Collectors.toList());
+        return userStoryMapper.toDtoList(userStories);
     }
 
     @Override

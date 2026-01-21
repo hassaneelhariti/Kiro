@@ -16,7 +16,7 @@ public interface UserStoryMapper {
     @Mapping(target = "sprintBacklogId",source = "sprintBacklog.id")
     UserStoryDto toUserStoryDto(UserStory userStory);
 
-    List<TaskDto> toDtoList(List<UserStory> UserStory);
+    List<UserStoryDto> toDtoList(List<UserStory> UserStory);
 
     //to entity
     @Mapping(target = "tasks", ignore = true)
