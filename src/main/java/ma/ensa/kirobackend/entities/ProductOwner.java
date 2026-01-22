@@ -1,15 +1,16 @@
 package ma.ensa.kirobackend.entities;
 
-
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Entity
-public class ProductOwner extends User{
-
-
+@Data
+@EqualsAndHashCode(callSuper = true)  // Important pour l'héritage
+public class ProductOwner extends User {
 
     @OneToMany(mappedBy = "productOwner")
-    List<Projet> projets;
+    private List<Projet> projets;
 }
