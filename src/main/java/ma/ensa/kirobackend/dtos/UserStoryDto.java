@@ -19,7 +19,7 @@ public class UserStoryDto {
     private String description;
 
     @Min(value = 1, message = "Priority must be at least 1")
-    @Max(value = 10, message = "Priority must be at most 10")
+    @Max(value = 3, message = "Priority must be at most 10")
     private int priority;
 
     private Status status;

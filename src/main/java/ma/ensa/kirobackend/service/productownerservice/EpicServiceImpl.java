@@ -37,7 +37,6 @@ public class EpicServiceImpl implements EpicService {
     public EpicDto createEpic(EpicDto epicDto) {
         Epic epic = epicMapper.toEntity(epicDto);
 
-        // Set ProductBacklog if productBacklogId is provided
         if (epicDto.getProductBacklogId() != null) {
             ProductBacklog productBacklog = productBacklogRepository.findById(epicDto.getProductBacklogId())
                     .orElseThrow(() -> new RuntimeException("ProductBacklog not found"));
