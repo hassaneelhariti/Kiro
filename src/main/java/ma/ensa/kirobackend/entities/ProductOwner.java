@@ -11,5 +11,5 @@ public class ProductOwner extends User{
 
 
     @OneToMany(mappedBy = "productOwner")
-    List<Projet> projets;
+    List<Projet> projects;
 }
