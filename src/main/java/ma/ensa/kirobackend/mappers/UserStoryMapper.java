@@ -14,6 +14,7 @@ public interface UserStoryMapper {
     //entity to dto
     @Mapping(target = "epicId",source = "epic.id")
     @Mapping(target = "sprintBacklogId",source = "sprintBacklog.id")
+    @Mapping(target = "tasks",ignore = true)
     UserStoryDto toUserStoryDto(UserStory userStory);
 
     List<UserStoryDto> toDtoList(List<UserStory> UserStory);
