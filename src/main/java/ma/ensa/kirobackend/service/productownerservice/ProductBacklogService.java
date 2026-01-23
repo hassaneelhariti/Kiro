@@ -9,7 +9,6 @@ public interface ProductBacklogService {
 
     ProductBacklogDto createProductBacklog(ProductBacklogDto productBacklogDto);
 
-    // Add Epic to ProductBacklog
     EpicDto addEpicToProductBacklog(Long productBacklogId, EpicDto epicDto);
 
     void deleteProductBacklog(Long projectDtoId);
