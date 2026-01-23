@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import ma.ensa.kirobackend.dtos.EpicDto;
 import ma.ensa.kirobackend.service.productownerservice.EpicService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,22 +16,26 @@ public class EpicController {
     private EpicService epicService;
 
     @GetMapping("/epic")
-    public List<EpicDto> getAllEpics() {
-        return epicService.getAllEpics();
+    public ResponseEntity<List<EpicDto>> getAllEpics() {
+        List<EpicDto> epicDtos = epicService.getAllEpics();
+        return ResponseEntity.ok(epicDtos);
     }
 
     @GetMapping("/epic/{id}")
-    public EpicDto getEpic(@PathVariable Long id) {
-        return epicService.getEpic(id);
+    public ResponseEntity<EpicDto> getEpic(@PathVariable Long id) {
+        EpicDto epicDto = epicService.getEpic(id);
+        return ResponseEntity.ok(epicDto);
     }
 
     @PostMapping("/epic")
-    public EpicDto createEpic(@Valid @RequestBody EpicDto epicDto) {
-        return epicService.createEpic(epicDto);
+    public ResponseEntity<EpicDto> createEpic(@Valid @RequestBody EpicDto epicDto) {
+        EpicDto epicCreated = epicService.createEpic(epicDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(epicCreated);
     }
 
     @DeleteMapping("/epic/{id}")
-    public void deleteEpic(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteEpic(@PathVariable Long id) {
         epicService.deleteEpic(id);
+        return ResponseEntity.ok().build();
     }
 }
