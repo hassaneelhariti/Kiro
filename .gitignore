@@ -47,4 +47,5 @@ full-output.log
 insert_kiro_data.sh
 list-project.sh
 
-src/main/resources/application.properties
+src/main/resources/application.propertiessrc/main/resources/application.properties
+*application.properties
