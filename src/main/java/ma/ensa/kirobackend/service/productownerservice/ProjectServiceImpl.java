@@ -57,7 +57,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void setScrumMaster(Long projectDtoId, Long scrumMasterId) {
+    public ProjetDto setScrumMaster(Long projectDtoId, Long scrumMasterId) {
         Projet projet = projetRepository.findById(projectDtoId)
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found"));
 
@@ -65,11 +65,12 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new RuntimeException("ScrumMaster not found"));
 
         projet.setScrumMaster(scrumMaster);
-        projetRepository.save(projet);
+        Projet updatedProjet = projetRepository.save(projet);
+        return projetMapper.toDto(updatedProjet);
     }
 
     @Override
-    public void addDeveloper(Long projectDtoId, Long developerId) {
+    public ProjetDto addDeveloper(Long projectDtoId, Long developerId) {
         Projet projet = projetRepository.findById(projectDtoId)
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found"));
 
@@ -79,12 +80,14 @@ public class ProjectServiceImpl implements ProjectService {
         // Add developer to project if not already added
         if (!projet.getDevelopers().contains(developer)) {
             projet.getDevelopers().add(developer);
-            projetRepository.save(projet);
         }
+
+        Projet updatedProjet = projetRepository.save(projet);
+        return projetMapper.toDto(updatedProjet);
     }
 
     @Override
-    public void setProductBacklog(Long projectDtoId, Long productBacklogId) {
+    public ProjetDto setProductBacklog(Long projectDtoId, Long productBacklogId) {
         Projet projet = projetRepository.findById(projectDtoId)
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found"));
 
@@ -92,11 +95,12 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new RuntimeException("ProductBacklog not found"));
 
         projet.setProductBacklog(productBacklog);
-        projetRepository.save(projet);
+        Projet updatedProjet = projetRepository.save(projet);
+        return projetMapper.toDto(updatedProjet);
     }
 
     @Override
-    public void addSprint(Long projectDtoId, Long sprintId) {
+    public ProjetDto addSprint(Long projectDtoId, Long sprintId) {
         Projet projet = projetRepository.findById(projectDtoId)
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found"));
 
@@ -107,8 +111,10 @@ public class ProjectServiceImpl implements ProjectService {
         if (!projet.getSprintBacklogs().contains(sprintBacklog)) {
             projet.getSprintBacklogs().add(sprintBacklog);
             sprintBacklog.setProjet(projet);
-            projetRepository.save(projet);
         }
+
+        Projet updatedProjet = projetRepository.save(projet);
+        return projetMapper.toDto(updatedProjet);
     }
 
     @Override
