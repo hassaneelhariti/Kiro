@@ -11,6 +11,6 @@ public interface ProductOwnerMapper {
 
     ProductOwnerDto toDto(ProductOwner productOwner);
 
-    @Mapping(target = "projets", ignore = true)
+    @Mapping(target = "ProductOwner.projects", ignore = true)
     ProductOwner toEntity(ProductOwnerDto productOwnerDto);
 }

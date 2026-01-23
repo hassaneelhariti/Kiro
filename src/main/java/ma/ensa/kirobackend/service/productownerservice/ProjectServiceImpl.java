@@ -103,6 +103,7 @@ public class ProjectServiceImpl implements ProjectService {
         SprintBacklog sprintBacklog = sprintBacklogRepository.findById(sprintId)
                 .orElseThrow(() -> new RuntimeException("Sprint not found"));
 
+
         // Add sprint to project if not already added
         if (!projet.getSprintBacklogs().contains(sprintBacklog)) {
             projet.getSprintBacklogs().add(sprintBacklog);
