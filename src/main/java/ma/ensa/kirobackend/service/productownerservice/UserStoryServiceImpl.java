@@ -13,7 +13,6 @@ import ma.ensa.kirobackend.repository.UserStoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -41,14 +40,12 @@ public class UserStoryServiceImpl implements UserStoryService {
     public UserStoryDto createUserStory(UserStoryDto userStoryDto) {
         UserStory userStory = userStoryMapper.dtoToUserStory(userStoryDto);
 
-        // Set Epic if epicId is provided
         if (userStoryDto.getEpicId() != null) {
             Epic epic = epicRepository.findById(userStoryDto.getEpicId())
                     .orElseThrow(() -> new RuntimeException("Epic not found"));
             userStory.setEpic(epic);
         }
 
-        // Set SprintBacklog if sprintBacklogId is provided
         if (userStoryDto.getSprintBacklogId() != null) {
             SprintBacklog sprintBacklog = sprintBacklogRepository.findById(userStoryDto.getSprintBacklogId())
                     .orElseThrow(() -> new RuntimeException("SprintBacklog not found"));
@@ -60,10 +57,13 @@ public class UserStoryServiceImpl implements UserStoryService {
     }
 
     @Override
-    public void deleteUserStory(Long userStoryId) {
+    public UserStoryDto deleteUserStory(Long userStoryId) {
         UserStory userStory = userStoryRepository.findById(userStoryId)
                 .orElseThrow(() -> new UserStoryNotFoundException("UserStory not found"));
 
+        UserStoryDto userStoryDto = userStoryMapper.toUserStoryDto(userStory);
         userStoryRepository.delete(userStory);
+
+        return userStoryDto;
     }
 }
