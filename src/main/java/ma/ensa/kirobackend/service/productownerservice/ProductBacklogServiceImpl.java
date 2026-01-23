@@ -35,6 +35,12 @@ public class ProductBacklogServiceImpl implements ProductBacklogService {
     public ProductBacklogDto createProductBacklog(ProductBacklogDto productBacklogDto) {
         ProductBacklog productBacklog = productBacklogMapper.toEntity(productBacklogDto);
 
+        if(productBacklog.getEpicsList().isEmpty()){
+            Epic defaultEpic = new Epic();
+            defaultEpic.setDescription("Default epic");
+            defaultEpic.setProductBacklog(productBacklog);
+            productBacklog.getEpicsList().add(defaultEpic);
+        }
 
         if (productBacklogDto.getProjetId() != null) {
             Projet projet = projetRepository.findById(productBacklogDto.getProjetId())

@@ -1,5 +1,6 @@
 package ma.ensa.kirobackend.dtos;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class ProductBacklogDto {
 
     private Long id;
 
+    @NotNull(message = "Project can not be null")
     private Long projetId;
 
     @NotBlank(message = "This can not be blank")

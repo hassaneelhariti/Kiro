@@ -15,7 +15,7 @@ public class Epic {
 
     private String description;
 
-    @OneToMany(mappedBy = "epic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "epic", cascade = CascadeType.ALL)
     private List<UserStory> userStoriesList;
 
     @ManyToOne
