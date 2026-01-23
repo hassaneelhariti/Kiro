@@ -10,47 +10,48 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/project")
 public class ProjectController {
     private ProjectService projectService;
 
-    @GetMapping("/project/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProjetDto> getProject(@PathVariable Long id) {
         ProjetDto projectDto = projectService.getProject(id);
         return ResponseEntity.ok(projectDto);
     }
 
-    @PostMapping("/project")
+    @PostMapping("/create")
     public ResponseEntity<ProjetDto> createProject(@Valid @RequestBody ProjetDto projectDto) {
         ProjetDto createdProject = projectService.createProject(projectDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProject);
     }
 
-    @PutMapping("/project/{id}/scrum-master/{scrumMasterId}")
-    public ResponseEntity<Void> setScrumMaster(@PathVariable Long id, @PathVariable Long scrumMasterId) {
-        projectService.setScrumMaster(id, scrumMasterId);
-        return ResponseEntity.ok().build();
+    @PutMapping("/{id}/scrum-master/{scrumMasterId}")
+    public ResponseEntity<ProjetDto> setScrumMaster(@PathVariable Long id, @PathVariable Long scrumMasterId) {
+        ProjetDto updatedProject = projectService.setScrumMaster(id, scrumMasterId);
+        return ResponseEntity.ok(updatedProject);
     }
 
-    @PostMapping("/project/{id}/developer/{developerId}")
-    public ResponseEntity<Void> addDeveloper(@PathVariable Long id, @PathVariable Long developerId) {
-        projectService.addDeveloper(id, developerId);
-        return ResponseEntity.ok().build();
+    @PostMapping("/{id}/developer/{developerId}")
+    public ResponseEntity<ProjetDto> addDeveloper(@PathVariable Long id, @PathVariable Long developerId) {
+        ProjetDto updatedProject = projectService.addDeveloper(id, developerId);
+        return ResponseEntity.ok(updatedProject);
     }
 
-    @PutMapping("/project/{id}/product-backlog/{productBacklogId}")
-    public ResponseEntity<Void> setProductBacklog(@PathVariable Long id, @PathVariable Long productBacklogId) {
-        projectService.setProductBacklog(id, productBacklogId);
-        return ResponseEntity.ok().build();
+    @PutMapping("/{id}/product-backlog/{productBacklogId}")
+    public ResponseEntity<ProjetDto> setProductBacklog(@PathVariable Long id, @PathVariable Long productBacklogId) {
+        ProjetDto updatedProject = projectService.setProductBacklog(id, productBacklogId);
+        return ResponseEntity.ok(updatedProject);
     }
 
-    @PostMapping("/project/{id}/sprint/{sprintId}")
-    public ResponseEntity<Void> addSprint(@PathVariable Long id, @PathVariable Long sprintId) {
-        projectService.addSprint(id, sprintId);
-        return ResponseEntity.ok().build();
+    @PostMapping("/{id}/sprint/{sprintId}")
+    public ResponseEntity<ProjetDto> addSprint(@PathVariable Long id, @PathVariable Long sprintId) {
+        ProjetDto updatedProject = projectService.addSprint(id, sprintId);
+        return ResponseEntity.ok(updatedProject);
     }
 
-    @DeleteMapping("/project/{id}")
-    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProjetDto> deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
         return ResponseEntity.noContent().build();
     }
