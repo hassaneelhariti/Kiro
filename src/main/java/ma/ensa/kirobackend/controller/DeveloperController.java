@@ -14,40 +14,41 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/developer")
 public class DeveloperController {
     private DeveloperService developerService;
     private SprintBacklogService sprintBacklogService;
 
-    @GetMapping("developer/{id}/task")
+    @GetMapping("/{id}/task")
     public List<TaskDto> getDevloperTasks(@PathVariable(name="id") Long id){
         return developerService.allTasks(id);
     }
 
-    @PutMapping("developer/{id}/task/{taskId}")
+    @PutMapping("/{id}/task/{taskId}")
     public TaskDto updateTaskStatus(@PathVariable(name="taskId") Long taskId, @RequestParam(name = "taskStatus") TaskStatus taskStatus){
         return developerService.updateTaskStatus(taskId ,taskStatus);
     }
     // temp
-    @GetMapping("developer/{id}/Sprint-Backlog/{sprintBacklogID}")
+    @GetMapping("/{id}/Sprint-Backlog/{sprintBacklogID}")
     public SprintBacklogDto viewSprintBacklog(@PathVariable(name = "sprintBacklogID") Long sprintBacklogId, @PathVariable String id){
         return sprintBacklogService.viewSprintBacklog(sprintBacklogId);
     }
 
     //Consulter ses projets
-    @GetMapping("developer/{id}/projet")
+    @GetMapping("/{id}/projet")
     public List<ProjetDto> viewMyProjects(@PathVariable Long id){
         return developerService.viewProjects(id);
     }
 
 
     // create own task
-    @PostMapping("/developer/{id}/create-task")
+    @PostMapping("/{id}/create-task")
     public TaskDto createOwnTask(@RequestBody TaskDto task){
         return developerService.createNewTask(task);
     }
 
     //comment to task
-    @PostMapping("/developer/{id}/comment")
+    @PostMapping("/{id}/comment")
     public CommentDto commentOnTask(@RequestBody CommentDto commentDto){
         return developerService.commentOnTask(commentDto);
     }
