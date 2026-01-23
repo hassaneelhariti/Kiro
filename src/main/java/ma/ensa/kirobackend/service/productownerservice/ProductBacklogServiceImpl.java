@@ -35,7 +35,7 @@ public class ProductBacklogServiceImpl implements ProductBacklogService {
     public ProductBacklogDto createProductBacklog(ProductBacklogDto productBacklogDto) {
         ProductBacklog productBacklog = productBacklogMapper.toEntity(productBacklogDto);
 
-        // Set Projet if projetId is provided
+
         if (productBacklogDto.getProjetId() != null) {
             Projet projet = projetRepository.findById(productBacklogDto.getProjetId())
                     .orElseThrow(() -> new RuntimeException("Projet not found"));
