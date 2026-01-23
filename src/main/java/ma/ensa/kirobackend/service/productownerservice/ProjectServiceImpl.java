@@ -33,6 +33,26 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public void setScrumMaster(Long projectDtoId, Long scrumMasterId) {
+
+    }
+
+    @Override
+    public void addDeveloper(Long projectDtoId, Long developerId) {
+
+    }
+
+    @Override
+    public void setProductBacklog(Long projectDtoId, Long productBacklogId) {
+
+    }
+
+    @Override
+    public void addSprint(Long projectDtoId, Long sprintId) {
+
+    }
+
+    @Override
     public void deleteProject(Long projectDtoId){
 
     }
