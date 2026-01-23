@@ -12,6 +12,6 @@ public interface UserStoryService {
 
     UserStoryDto createUserStory(UserStoryDto userStoryDto);
 
-    UserStoryDto deleteUserStory(Long userStoryId);
+    void deleteUserStory(Long userStoryId);
 
 }

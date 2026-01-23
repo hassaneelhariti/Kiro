@@ -35,8 +35,8 @@ public class UserStoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserStoryDto> deleteUserStory(@PathVariable Long id) {
-        UserStoryDto deletedUserStory = userStoryService.deleteUserStory(id);
-        return ResponseEntity.ok(deletedUserStory);
+    public ResponseEntity<Void> deleteUserStory(@PathVariable Long id) {
+        userStoryService.deleteUserStory(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

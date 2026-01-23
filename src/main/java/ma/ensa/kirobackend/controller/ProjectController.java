@@ -47,12 +47,12 @@ public class ProjectController {
     @PostMapping("/{id}/sprint/{sprintId}")
     public ResponseEntity<ProjetDto> addSprint(@PathVariable Long id, @PathVariable Long sprintId) {
         ProjetDto updatedProject = projectService.addSprint(id, sprintId);
-        return ResponseEntity.ok(updatedProject);
+        return ResponseEntity.status(HttpStatus.CREATED).body(updatedProject);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProjetDto> deleteProject(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

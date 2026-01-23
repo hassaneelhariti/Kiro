@@ -57,13 +57,9 @@ public class UserStoryServiceImpl implements UserStoryService {
     }
 
     @Override
-    public UserStoryDto deleteUserStory(Long userStoryId) {
+    public void deleteUserStory(Long userStoryId) {
         UserStory userStory = userStoryRepository.findById(userStoryId)
                 .orElseThrow(() -> new UserStoryNotFoundException("UserStory not found"));
-
-        UserStoryDto userStoryDto = userStoryMapper.toUserStoryDto(userStory);
         userStoryRepository.delete(userStory);
-
-        return userStoryDto;
     }
 }
