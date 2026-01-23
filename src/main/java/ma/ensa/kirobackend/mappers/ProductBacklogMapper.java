@@ -11,7 +11,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = EpicMapper.class)
 public interface ProductBacklogMapper {
 
-    @Mapping(target = "projetId", expression = "java(productBacklog.getProjet() != null ? productBacklog.getProjet().getId() : null)")
+    @Mapping(target = "projetId", source = "projet.id")
+    @Mapping(target = "epicsList",ignore = true)
     ProductBacklogDto toDto(ProductBacklog productBacklog);
 
     List<ProductBacklogDto> toDtoList(List<ProductBacklog> productBacklogs);
