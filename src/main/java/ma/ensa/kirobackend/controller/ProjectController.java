@@ -26,23 +26,12 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProject);
     }
 
-    @PutMapping("/{id}/scrum-master/{scrumMasterId}")
-    public ResponseEntity<ProjetDto> setScrumMaster(@PathVariable Long id, @PathVariable Long scrumMasterId) {
-        ProjetDto updatedProject = projectService.setScrumMaster(id, scrumMasterId);
-        return ResponseEntity.ok(updatedProject);
-    }
-
     @PostMapping("/{id}/developer/{developerId}")
     public ResponseEntity<ProjetDto> addDeveloper(@PathVariable Long id, @PathVariable Long developerId) {
         ProjetDto updatedProject = projectService.addDeveloper(id, developerId);
         return ResponseEntity.ok(updatedProject);
     }
 
-    @PutMapping("/{id}/product-backlog/{productBacklogId}")
-    public ResponseEntity<ProjetDto> setProductBacklog(@PathVariable Long id, @PathVariable Long productBacklogId) {
-        ProjetDto updatedProject = projectService.setProductBacklog(id, productBacklogId);
-        return ResponseEntity.ok(updatedProject);
-    }
 
     @PostMapping("/{id}/sprint/{sprintId}")
     public ResponseEntity<ProjetDto> addSprint(@PathVariable Long id, @PathVariable Long sprintId) {

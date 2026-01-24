@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true)  // Important pour l'héritage
+@EqualsAndHashCode(callSuper = true)
 public class ProductOwner extends User {
 
     @OneToMany(mappedBy = "productOwner")

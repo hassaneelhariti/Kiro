@@ -57,19 +57,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjetDto setScrumMaster(Long projectDtoId, Long scrumMasterId) {
-        Projet projet = projetRepository.findById(projectDtoId)
-                .orElseThrow(() -> new ProjectNotFoundException("Project not found"));
-
-        ScrumMaster scrumMaster = scrumMasterRepository.findById(scrumMasterId)
-                .orElseThrow(() -> new RuntimeException("ScrumMaster not found"));
-
-        projet.setScrumMaster(scrumMaster);
-        Projet updatedProjet = projetRepository.save(projet);
-        return projetMapper.toDto(updatedProjet);
-    }
-
-    @Override
     public ProjetDto addDeveloper(Long projectDtoId, Long developerId) {
         Projet projet = projetRepository.findById(projectDtoId)
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found"));
@@ -82,19 +69,6 @@ public class ProjectServiceImpl implements ProjectService {
             projet.getDevelopers().add(developer);
         }
 
-        Projet updatedProjet = projetRepository.save(projet);
-        return projetMapper.toDto(updatedProjet);
-    }
-
-    @Override
-    public ProjetDto setProductBacklog(Long projectDtoId, Long productBacklogId) {
-        Projet projet = projetRepository.findById(projectDtoId)
-                .orElseThrow(() -> new ProjectNotFoundException("Project not found"));
-
-        ProductBacklog productBacklog = productBacklogRepository.findById(productBacklogId)
-                .orElseThrow(() -> new RuntimeException("ProductBacklog not found"));
-
-        projet.setProductBacklog(productBacklog);
         Projet updatedProjet = projetRepository.save(projet);
         return projetMapper.toDto(updatedProjet);
     }

@@ -3,6 +3,7 @@ package ma.ensa.kirobackend.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,8 +16,8 @@ public class Epic {
 
     private String description;
 
-    @OneToMany(mappedBy = "epic", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserStory> userStoriesList;
+    @OneToMany(mappedBy = "epic", cascade = CascadeType.ALL)
+    private List<UserStory> userStoriesList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "product_backlog_id")

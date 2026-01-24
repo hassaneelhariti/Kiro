@@ -14,6 +14,8 @@ import ma.ensa.kirobackend.repository.ProductBacklogRepository;
 import ma.ensa.kirobackend.repository.ProjetRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @AllArgsConstructor
 public class ProductBacklogServiceImpl implements ProductBacklogService {
@@ -35,7 +37,17 @@ public class ProductBacklogServiceImpl implements ProductBacklogService {
     public ProductBacklogDto createProductBacklog(ProductBacklogDto productBacklogDto) {
         ProductBacklog productBacklog = productBacklogMapper.toEntity(productBacklogDto);
 
-        // Set Projet if projetId is provided
+        if (productBacklog.getEpicsList() == null) {
+            productBacklog.setEpicsList(new ArrayList<>());
+        }
+
+        if(productBacklog.getEpicsList().isEmpty()){
+            Epic defaultEpic = new Epic();
+            defaultEpic.setDescription("Default epic");
+            defaultEpic.setProductBacklog(productBacklog);
+            productBacklog.getEpicsList().add(defaultEpic);
+        }
+
         if (productBacklogDto.getProjetId() != null) {
             Projet projet = projetRepository.findById(productBacklogDto.getProjetId())
                     .orElseThrow(() -> new RuntimeException("Projet not found"));

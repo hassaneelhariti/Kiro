@@ -29,10 +29,10 @@ public class ProjetDto {
 
     // ================= Relations (IDs only) =================
 
-//    @NotNull(message = "Product Owner is required")
+    @NotNull(message = "Product Owner is required")
     private Long productOwnerId;
 
-//    @NotNull(message = "Scrum Master is required")
+    @NotNull(message = "Scrum Master is required")
     private Long scrumMasterId;
 
 //    @NotNull(message = "Developers list cannot be null")
