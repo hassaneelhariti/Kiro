@@ -48,5 +48,3 @@ insert_kiro_data.sh
 list-project.sh
 
 src/main/resources/application.properties
-*application.properties
-/src/main/resources/
