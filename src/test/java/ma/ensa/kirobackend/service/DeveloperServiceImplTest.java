@@ -50,58 +50,76 @@ class DeveloperServiceImplTest {
 
     @Test
     void testAllTasks_returnsTasksWithComments() {
+        // Developer
         Long devId = 1L;
         Developer developer = new Developer();
         developer.setId(devId);
 
-
+        // Tasks
         Task task1 = new Task();
         task1.setId(101L);
         Task task2 = new Task();
         task2.setId(102L);
 
+        // Comments
         Comment comment1 = new Comment();
         comment1.setId(201L);
+        comment1.setTask(task1);
+        comment1.setUser(developer);
+
         Comment comment2 = new Comment();
         comment2.setId(202L);
+        comment2.setTask(task2);
+        comment2.setUser(developer);
 
         task1.setComments(List.of(comment1));
         task2.setComments(List.of(comment2));
 
+        // Task DTOs with nested comment DTOs
         TaskDto taskDto1 = new TaskDto();
         taskDto1.setId(101L);
-        TaskDto taskDto2 = new TaskDto();
-        taskDto2.setId(102L);
-
         CommentDto commentDto1 = new CommentDto();
         commentDto1.setId(201L);
+        commentDto1.setTaskId(101L);
+        commentDto1.setUserId(1L);
+        commentDto1.setUserName("Dev One");
+        taskDto1.setCommentDtos(List.of(commentDto1));
+
+        TaskDto taskDto2 = new TaskDto();
+        taskDto2.setId(102L);
         CommentDto commentDto2 = new CommentDto();
         commentDto2.setId(202L);
+        commentDto2.setTaskId(102L);
+        commentDto2.setUserId(1L);
+        commentDto2.setUserName("Dev One");
+        taskDto2.setCommentDtos(List.of(commentDto2));
 
+        // Mock repository calls
         when(developerRepository.findById(devId)).thenReturn(Optional.of(developer));
         when(taskRepository.findAllByDeveloperId(devId)).thenReturn(List.of(task1, task2));
-        when(taskMapper.taskToTaskDto(task1)).thenReturn(taskDto1);
-        when(taskMapper.taskToTaskDto(task2)).thenReturn(taskDto2);
-        when(commentMapper.commentToCommentDto(comment1)).thenReturn(commentDto1);
-        when(commentMapper.commentToCommentDto(comment2)).thenReturn(commentDto2);
 
+        // Mock mapper call for toDtoList
+        when(taskMapper.toDtoList(List.of(task1, task2)))
+                .thenReturn(List.of(taskDto1, taskDto2));
+
+        // Call service
         List<TaskDto> result = developerService.allTasks(devId);
 
+        // Assertions
         assertEquals(2, result.size());
-        assertEquals(101L, result.get(0).getId());
-        assertEquals(102L, result.get(1).getId());
 
+        assertEquals(101L, result.get(0).getId());
         assertEquals(1, result.get(0).getCommentDtos().size());
         assertEquals(201L, result.get(0).getCommentDtos().get(0).getId());
+
+        assertEquals(102L, result.get(1).getId());
         assertEquals(1, result.get(1).getCommentDtos().size());
         assertEquals(202L, result.get(1).getCommentDtos().get(0).getId());
 
+        // Verify repository and mapper interactions
         verify(developerRepository).findById(devId);
         verify(taskRepository).findAllByDeveloperId(devId);
-        verify(taskMapper, times(1)).taskToTaskDto(task1);
-        verify(taskMapper, times(1)).taskToTaskDto(task2);
-        verify(commentMapper, times(1)).commentToCommentDto(comment1);
-        verify(commentMapper, times(1)).commentToCommentDto(comment2);
+        verify(taskMapper).toDtoList(List.of(task1, task2));
     }
 
     @Test
