@@ -6,6 +6,8 @@ import ma.ensa.kirobackend.entities.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = CommentMapper.class)
 public interface CommentMapper {
     //Entity to Dto
@@ -22,4 +24,5 @@ public interface CommentMapper {
     @Mapping(target = "photo", source = "photoBase64")
     Comment dtoToComment(CommentDto commentDto);
 
+    List<CommentDto> toDtoList(List<Comment> commentList);
 }

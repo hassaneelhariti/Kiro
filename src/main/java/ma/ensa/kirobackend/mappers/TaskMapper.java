@@ -5,6 +5,8 @@ import ma.ensa.kirobackend.entities.Task;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring",uses = CommentMapper.class)
 public interface TaskMapper {
 
@@ -20,4 +22,6 @@ public interface TaskMapper {
     @Mapping(target = "scrumMaster", ignore = true)
     @Mapping(target = "userStory", ignore = true)
     Task dtoToTask(TaskDto taskDto);
+
+    List<TaskDto> toDtoList(List<Task> tasks);
 }
