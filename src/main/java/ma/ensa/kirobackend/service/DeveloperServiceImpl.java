@@ -34,17 +34,9 @@ public class DeveloperServiceImpl implements DeveloperService{
         if(developer==null) throw new UserNotFoundException("Developer not Found");
 
         List<Task> devTasks=taskRepository.findAllByDeveloperId(developer.getId());
-        List<TaskDto> devTasksDto=new ArrayList<>();
-        for (Task task : devTasks ){
-            TaskDto taskDto=taskMapper.taskToTaskDto(task);
-            List<CommentDto> commentDtos=new ArrayList<>();
-            for (Comment comment: task.getComments()){
-                CommentDto commentDto=commentMapper.commentToCommentDto(comment);
-                commentDtos.add(commentDto);
-            }
-            taskDto.setCommentDtos(commentDtos);
-            devTasksDto.add(taskDto);
-        }
+        List<TaskDto> devTasksDto=taskMapper.toDtoList(devTasks);
+
+
         return devTasksDto;
     }
     @Override
