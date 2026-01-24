@@ -49,3 +49,4 @@ list-project.sh
 
 src/main/resources/application.properties
 *application.properties
+/src/main/resources/
